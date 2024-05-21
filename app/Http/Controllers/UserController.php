@@ -43,14 +43,14 @@ class UserController extends Controller
         try {
             $credentials = request(['email', 'password']);
 
-            if (!$token = auth()->attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+            if (!$token = Auth::attempt($credentials)) {
+                return response()->json(['error' => 'User atau password salah.'], 401);
             }
 
             return response()->json([
                 'status' => 'berhasil',
-                'user' => auth()->guard('api')->user(),
-                'token' => $token
+                'user' => auth()->user(),
+                'token' => $this->respondWithToken($token)
             ]);
 
         } catch (\Exception $e) {
