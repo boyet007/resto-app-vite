@@ -2,16 +2,37 @@
     <img class="logo" src="../assets/resto-logo.jpg" />
     <h1>Sign Up</h1>
     <div class="register">
-        <input type="text" placeholder="Enter Name" name="" id="" />
-        <input type="text" placeholder="Enter Email" name="" id="" />
-        <input type="password" placeholder="Enter Password" name="" id="" />
-        <button>Sign Up</button>
+        <input type="text" v-model="name" placeholder="Enter Name" name="" id="name" />
+        <input type="text" v-model="email" placeholder="Enter Email" name="" id="email" />
+        <input type="password" v-model="password" placeholder="Enter Password" name="password" id="" />
+        <button @click="signUp">Sign Up</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: "SignUp",
+    data() {
+        return {
+            name: '', 
+            email: '', 
+            password: ''
+        }
+    },
+    methods: {
+        async signUp() {
+            console.log('sign up')
+            let result = axios.post('http://localhost:8000/users', {
+                name: this.name,
+                email: this.email,
+                password: this.password
+            });
+            console.warn(result);
+            
+        }
+ 
+    }
 };
 </script>
 
