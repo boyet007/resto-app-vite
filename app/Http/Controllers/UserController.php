@@ -26,7 +26,7 @@ class UserController extends Controller
             'email'=> $request->email,
             'password'=> Hash::make($request->password),
         ]);
-        return response()->json(['pesan' => 'User baru berhasil dibuat.', 'user' => $user]);
+        return response()->json(['pesan' => 'User baru berhasil dibuat.', 'user' => $user], 201);
     }
  
     public function login(Request $request)

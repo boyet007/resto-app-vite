@@ -15,21 +15,24 @@ export default {
     name: "SignUp",
     data() {
         return {
-            name: '', 
-            email: '', 
-            password: ''
+            name: 'Test User', 
+            email: 'test2@gmail.com', 
+            password: 'Wynne!324'
         }
     },
     methods: {
         async signUp() {
             console.log('sign up')
-            let result = axios.post('http://localhost:8000/users', {
+            const result = await axios.post('http://localhost:8000/api/auth/signup?XDEBUG_SESSION_START=VSCODE', {
                 name: this.name,
                 email: this.email,
                 password: this.password
             });
             console.warn(result);
-            
+            if (result.status === 201) {
+                alert('Signup done.');
+                localStorage.setItem('user-info', JSON.stringify(result.data.user));
+            }
         }
  
     }
