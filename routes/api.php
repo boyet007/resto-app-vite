@@ -10,7 +10,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('login', [UserController::class,'login']);
+    Route::get('login', [UserController::class,'login']);
     Route::post('signup', [UserController::class, 'signUp']);
 
     // Route::post('logout', 'AuthController@logout');

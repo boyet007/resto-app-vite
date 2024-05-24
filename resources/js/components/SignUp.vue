@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         async signUp() {
-            console.log('sign up')
             const result = await axios.post('http://localhost:8000/api/auth/signup?XDEBUG_SESSION_START=VSCODE', {
                 name: this.name,
                 email: this.email,
@@ -42,7 +41,6 @@ export default {
     mounted() {
         let user = localStorage.getItem('user-info');
         if (user) {
-            console.log(user)
             this.$router.push({ name: 'Home' });
         }
     }

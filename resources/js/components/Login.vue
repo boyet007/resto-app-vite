@@ -14,7 +14,7 @@
 <script>
 import axios from 'axios';
 export default {
-    name: "SignUp",
+    name: "Login",
     data() {
         return {
             email: 'test2@gmail.com', 
@@ -23,15 +23,8 @@ export default {
     },
     methods: {
         async login() {
-            console.log('sign up')
-            const result = await axios.post('http://localhost:8000/api/auth/signup?XDEBUG_SESSION_START=VSCODE', {
-                name: this.name,
-                email: this.email,
-                password: this.password
-            });
-            console.warn(result);
-            if (result.status === 201) {
-                alert('Signup done.');
+            const result = await axios.get(`http://localhost:8000/api/auth/login?email=${this.email}&password=${this.password}&XDEBUG_SESSION_START=VSCODE`);
+            if (result.status === 200 && result.data.user.name) {
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
                 this.$router.push({ name: 'Home' });
             }
@@ -40,7 +33,6 @@ export default {
     mounted() {
         let user = localStorage.getItem('user-info');
         if (user) {
-            console.log(user)
             this.$router.push({ name: 'Home' });
         }
     }

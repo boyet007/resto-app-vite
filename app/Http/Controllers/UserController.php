@@ -50,7 +50,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => 'berhasil',
                 'user' => auth()->user(),
-                'token' => $this->respondWithToken($token)
+                'token' => $token
             ]);
 
         } catch (\Exception $e) {
