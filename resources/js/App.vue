@@ -1,4 +1,5 @@
 <template>
+
   <router-view></router-view>
 </template>
 
@@ -17,16 +18,26 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  /* color: #2c3e50;
+  margin-top: 60px; */
   color: #2c3e50;
-  margin-top: 60px;
+
 }
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+
 
 .logo {
   width: 100px;
   border-radius: 30px;
 }
 
-.register input, .login input {
+.register input,
+.login input {
   display: block;
   width: 300px;
   height: 40px;
@@ -37,7 +48,8 @@ export default {
   margin-right: auto;
 }
 
-.register button, .login button {
+.register button,
+.login button {
   cursor: pointer;
   color: white;
   background: skyblue;
