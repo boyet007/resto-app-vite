@@ -34,8 +34,14 @@ export default {
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
                 this.$router.push({ name: 'Home' });
             }
+        },
+    },
+    mounted() {
+        let user = localStorage.getItem('user-info');
+        if (user) {
+            console.log(user)
+            this.$router.push({ name: 'Home' });
         }
- 
     }
 };
 </script>
