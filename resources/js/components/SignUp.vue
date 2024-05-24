@@ -32,6 +32,7 @@ export default {
             if (result.status === 201) {
                 alert('Signup done.');
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
+                this.$router.push({ name: 'Home' });
             }
         }
  
