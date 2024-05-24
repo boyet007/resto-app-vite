@@ -1,13 +1,12 @@
 <template>
     <img class="logo" src="../assets/resto-logo.jpg" />
-    <h1>Sign Up</h1>
-    <div class="register">
-        <input type="text" v-model="name" placeholder="Enter Name" name="" id="name" />
+    <h1>Login</h1>
+    <div class="login">
         <input type="text" v-model="email" placeholder="Enter Email" name="" id="email" />
         <input type="password" v-model="password" placeholder="Enter Password" name="password" id="" />
-        <button @click="signUp">Sign Up</button>
+        <button @click="login">Login</button>
         <p>
-            <router-link to="/login">Login</router-link>
+            <router-link to="/sign-up">Sign Up</router-link>
         </p>
     </div>
 </template>
@@ -18,13 +17,12 @@ export default {
     name: "SignUp",
     data() {
         return {
-            name: 'Test User', 
             email: 'test2@gmail.com', 
             password: 'Wynne!324'
         }
     },
     methods: {
-        async signUp() {
+        async login() {
             console.log('sign up')
             const result = await axios.post('http://localhost:8000/api/auth/signup?XDEBUG_SESSION_START=VSCODE', {
                 name: this.name,
@@ -48,5 +46,3 @@ export default {
     }
 };
 </script>
-
-
