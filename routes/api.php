@@ -12,10 +12,9 @@ Route::group([
 ], function ($router) {
     Route::get('login', [UserController::class,'login']);
     Route::post('signup', [UserController::class, 'signUp']);
-
-    // Route::post('logout', 'AuthController@logout');
+    Route::post('logout', [UserController::class,'logout']);
+    Route::post('me', [UserController::class, 'me']);   
     // Route::post('refresh', 'AuthController@refresh');
-    // Route::post('me', 'AuthController@me');
 });
 
 Route::get('/xdebug', function() {
