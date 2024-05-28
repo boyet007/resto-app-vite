@@ -23,9 +23,10 @@ export default {
     },
     methods: {
         async login() {
-            const result = await axios.get(`http://localhost:8000/api/auth/login?email=${this.email}&password=${this.password}&XDEBUG_SESSION_START=VSCODE`);
+            const result = await axios.post(`/api/auth/login?email=${this.email}&password=${this.password}`);
             if (result.status === 200 && result.data.user.name) {
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
+                localStorage.setItem('token', JSON.stringify(result.data.token));
                 this.$router.push({ name: 'Home' });
             }
         },

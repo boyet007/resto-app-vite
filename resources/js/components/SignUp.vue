@@ -13,19 +13,19 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from 'axios';
 export default {
     name: "SignUp",
     data() {
         return {
-            name: 'Test User', 
-            email: 'test2@gmail.com', 
+            name: 'Mulyadi', 
+            email: 'mulyadi@gmail.com', 
             password: 'Wynne!324'
         }
     },
     methods: {
         async signUp() {
-            const result = await axios.post('http://localhost:8000/api/auth/signup?XDEBUG_SESSION_START=VSCODE', {
+            const result = await axiosInstance.post('/api/auth/signup', {
                 name: this.name,
                 email: this.email,
                 password: this.password
@@ -34,6 +34,7 @@ export default {
             if (result.status === 201) {
                 alert('Signup done.');
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
+                localStorage.setItem('token', JSON.stringify(result.data.token));
                 this.$router.push({ name: 'Home' });
             }
         },

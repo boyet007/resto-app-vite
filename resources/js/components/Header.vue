@@ -8,12 +8,20 @@
 </template>
 
 <script>
+import axiosInstance from 'axios';
 export default {
     name: 'Header',
     methods: {
-        logout() {
-            localStorage.clear();
+        async logout() {
+            const result = await axiosInstance.post('/logout', {
+                name: this.name,
+                email: this.email,
+                password: this.password
+            });
+            if (result.status === 200) {
+                    localStorage.clear();
             this.$router.push({ name: 'Login'});
+            }
         }
     }
 }
