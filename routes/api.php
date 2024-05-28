@@ -6,15 +6,16 @@ use App\Http\Controllers\UserController;
 
 
 
+Route::post('/auth/login', [UserController::class,'login']);
+Route::post('/auth/signup', [UserController::class, 'signUp']);
+
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'auth:api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::get('login', [UserController::class,'login']);
-    Route::post('signup', [UserController::class, 'signUp']);
-    Route::post('logout', [UserController::class,'logout']);
-    Route::post('me', [UserController::class, 'me']);   
-    // Route::post('refresh', 'AuthController@refresh');
+    Route::post('/logout', [UserController::class,'logout']);
+    Route::post('/refresh', [UserController::class, 'refresh']);
+    Route::post('/me', [UserController::class, 'me']);   
 });
 
 Route::get('/xdebug', function() {

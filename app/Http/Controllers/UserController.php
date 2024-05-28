@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login', 'signUp']]);
+    // }
+
     public function signUp(Request $request) {
         $request->validate([
             'name' => 'required',
@@ -47,11 +52,12 @@ class UserController extends Controller
         try {
             $credentials = request(['email', 'password']);
 
-            if (!$token = Auth::attempt($credentials)) {
-                return response()->json(['error' => 'User atau password salah.'], 401);
+            if (Auth::attempt($credentials)) {
+                $token = JwtAuth::fromUser(Auth::user());
+                return $this->respondWithToken($token);
             }
+            return response()->json(['error' => 'User atau password salah.'], 401);
 
-            return $this->respondWithToken($token);
         } catch (\Exception $e) {
             return response(['status' => 'kesalahan.', 'error' => $e->getMessage()], 500);
         }
@@ -68,6 +74,15 @@ class UserController extends Controller
             return response()->json(['pesan'=> $e->getMessage()], 500);
         } catch (\Exception $e) {
             return response(['status'=> 'error', 'pesan' => 'Ada Kesalahan'],500);
+        }
+    }
+
+    public function refresh(Request $request) {
+        try {
+            $newToken = JWTAuth::refresh(JWTAuth::getToken());
+            return response()->json(['token' => $newToken]);
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['pesan' => 'Tidak bisa merefresh token'], 500);
         }
     }
 
