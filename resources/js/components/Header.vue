@@ -15,8 +15,7 @@ export default {
     methods: {
         async logout() {
             try {
-                let result = await axiosInstance.post('/api/auth/logout');
-                console.log('result', result);
+                await axiosInstance.post('/api/auth/logout');
                 localStorage.clear();
                 this.$router.push({ name: 'Login'});
             } catch (error) {
