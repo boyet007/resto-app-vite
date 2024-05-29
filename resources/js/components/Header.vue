@@ -8,19 +8,19 @@
 </template>
 
 <script>
-import axiosInstance from 'axios';
+import axiosInstance from '@/axios.js';
+import axios from 'axios';
 export default {
     name: 'Header',
     methods: {
         async logout() {
-            const result = await axiosInstance.post('/logout', {
-                name: this.name,
-                email: this.email,
-                password: this.password
-            });
-            if (result.status === 200) {
-                    localStorage.clear();
-            this.$router.push({ name: 'Login'});
+            try {
+                let result = await axiosInstance.post('/api/auth/logout');
+                console.log('result', result);
+                localStorage.clear();
+                this.$router.push({ name: 'Login'});
+            } catch (error) {
+                console.error('Ada error ketika logout', error);
             }
         }
     }

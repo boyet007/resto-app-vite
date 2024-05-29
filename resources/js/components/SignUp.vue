@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axiosInstance from 'axios';
+import axiosInstance from '@/axios';
 export default {
     name: "SignUp",
     data() {

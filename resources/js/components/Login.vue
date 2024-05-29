@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosDistance from '@/axios.js';
 export default {
     name: "Login",
     data() {
@@ -23,7 +23,10 @@ export default {
     },
     methods: {
         async login() {
-            const result = await axios.post(`/api/auth/login?email=${this.email}&password=${this.password}`);
+            const result = await axiosDistance.post('/api/auth/login', {
+                email: this.email,
+                password: this.password
+            });
             if (result.status === 200 && result.data.user.name) {
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
                 localStorage.setItem('token', JSON.stringify(result.data.token));
