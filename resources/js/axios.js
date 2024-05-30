@@ -5,13 +5,10 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(config => {
-  const applicationToken = localStorage.getItem('token'); 
-  if (applicationToken) {
-    const token = applicationToken.replace(/['"]+/g, '');
+  const token = localStorage.getItem('token'); 
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
-  } else {
-    console.warn('no token found in local storage');    
-  }
+  } 
   return config;
 }, error => {
   return Promise.reject(error);

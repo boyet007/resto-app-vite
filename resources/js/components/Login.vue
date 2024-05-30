@@ -29,7 +29,7 @@ export default {
             });
             if (result.status === 200 && result.data.user.name) {
                 localStorage.setItem('user-info', JSON.stringify(result.data.user));
-                localStorage.setItem('token', JSON.stringify(result.data.token));
+                localStorage.setItem('token', result.data.token);
                 this.$router.push({ name: 'Home' });
             }
         },
