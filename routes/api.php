@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RestaurantController;
 
 
 
@@ -16,6 +17,10 @@ Route::group([
     Route::post('/logout', [UserController::class,'logout']);
     Route::post('/refresh', [UserController::class, 'refresh']);
     Route::post('/me', [UserController::class, 'me']);   
+});
+
+Route::group(['middleware' => 'auth:api'], function ($router) {
+    Route::apiResource('restaurants', RestaurantController::class);
 });
 
 Route::get('/xdebug', function() {
