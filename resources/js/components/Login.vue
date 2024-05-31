@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axiosDistance from '@/axios.js';
+import axiosInstance from '@/axios.js';
 export default {
     name: "Login",
     data() {
@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         async login() {
-            const result = await axiosDistance.post('/api/auth/login', {
+            const result = await axiosInstance.post('/api/auth/login', {
                 email: this.email,
                 password: this.password
             });
