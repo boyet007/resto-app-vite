@@ -37,19 +37,19 @@ body {
 }
 
 .register input,
-.login input {
+.login input, .add input {
   display: block;
   width: 300px;
   height: 40px;
   padding-left: 20px;
   margin-bottom: 12px;
-  border: 1px solid black;
+  border: 1px solid brown;
   margin-left: auto;
   margin-right: auto;
 }
 
 .register button,
-.login button {
+.login button, .add button {
   cursor: pointer;
   color: white;
   background: skyblue;
