@@ -17,7 +17,9 @@
             <td>{{ restaurant.name }}</td>
             <td>{{ restaurant.contact }}</td>
             <td>{{ restaurant.address }}</td>
-            <td><router-link :to="`/update/${restaurant.id}`">Update</router-link></td>
+            <td><router-link :to="`/update/${restaurant.id}`">Update</router-link>
+            <button @click="deleteRestaurant(restaurant.id)">Delete</button>
+            </td>
         </tr>
     </table>
 
@@ -45,8 +47,21 @@ export default {
         } else {
             this.name = JSON.parse(user).name;
         }
-        let result = await axiosInstance.get('/api/restaurants');
-        this.restaurants = result.data.restaurants;
+        this.loadData();
+
+    },
+    methods: {
+        async loadData() {
+            let result = await axiosInstance.get('/api/restaurants');
+            this.restaurants = result.data.restaurants;
+        },
+        async deleteRestaurant(id) {
+            let result = await axiosInstance.delete('/api/restaurants/' + id);
+            if (result.status === 204) {
+                alert('Data restaurant '  + id + ' sukses dihapus.');
+                this.loadData();
+            }
+        }
     }
 }
 </script>

@@ -29,14 +29,14 @@
             this.restaurant = result.data.restaurant;
         },
         methods: {
-            async addRestaurant() { 
-                const result = await axiosInstance.post('/api/restaurants', {
+            async updateRestaurant() { 
+                const result = await axiosInstance.put('/api/restaurants/' + this.$route.params.id, {
                     name: this.restaurant.name,
                     contact: this.restaurant.contact,
                     address: this.restaurant.address
                 });
 
-                if (result.status === 201) {
+                if (result.status === 200) {
                     alert(result.data.pesan);
                     this.$router.push({ name: 'Home' })
 
